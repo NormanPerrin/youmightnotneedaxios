@@ -56,18 +56,28 @@ h1, h2, h3 {
 }
 
 .comparison >section {
-    width: 50%;
+    width: 100%;
 }
 
 .highlight {
     padding: 1rem;
 }
 
-/* --- pre highlight --- */
-
 pre .p, pre .o { color: mediumturquoise; }
 pre .s1, pre .s2 { color: mediumseagreen; }
 pre .c1 { color: gray; }
 pre .k1 { color: dodgerblue; }
-pre .kd { color: mediumspringgreen; }
+pre .kd {
+    font-family: 'JetBrainsMono-BoldItalic';
+    color: mediumspringgreen;
+}
 pre .nb { color: mediumpurple; }
+
+@media (max-width: 1024px) {
+    .comparison {
+        flex-direction: column;
+    }
+    .comparison >section {
+        width: 100%;
+    }
+}
