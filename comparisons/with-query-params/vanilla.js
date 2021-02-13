@@ -23,7 +23,7 @@ Object.keys(params).forEach(key =>
 
 fetch(url)
     .then(response => response.text())
-    .then(console.log);
+    .then(data => console.log(data));
 
 // --------------------------------------- //
 // Or with the URLSearchParams constructor //
@@ -46,4 +46,4 @@ url.search = new URLSearchParams(params).toString();
 
 fetch(url)
     .then(response => response.text())
-    .then(console.log);
+    .then(data => console.log(data));

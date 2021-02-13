@@ -2,4 +2,4 @@ const url = 'https://example.com';
 
 fetch(url)
     .then(response => response.json())
-    .then(console.log);
+    .then(data => console.log(data));
