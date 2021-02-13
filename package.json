@@ -1,0 +1,26 @@
+{
+    "name": "youmightnotneedaxios",
+    "scripts": {
+        "build": "rm index.html && ./build.sh >>index.html",
+        "lint": "lint "
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NormanPerrin/youmightnotneedaxios.git"
+    },
+    "keywords": [],
+    "author": "Comunidad IT",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/NormanPerrin/youmightnotneedaxios/issues"
+    },
+    "homepage": "https://youmightnotneedaxios.com",
+    "dependencies": {
+        "axios": "^0.21.1"
+    },
+    "devDependencies": {
+        "eslint": "^7.19.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.22.1"
+    }
+}

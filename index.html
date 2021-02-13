@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<title>You might not need axios</title>
+<meta name="description" content="Comparisons between the axios library and fetch API" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="./styles.css" />
+    <h2>fetch</h2>
+    <section class="comparison fetch">
+        <section class="vanilla">
+            <h3>vanilla</h3>
+            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">;</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</code></pre></div>
+        </section>
+        <section class="axios">
+            <h3>axios</h3>
+            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">;</span>
+
+<span class="nx">axios</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+</code></pre></div>
+        </section>
+    </section>
+    <h2>with query params</h2>
+    <section class="comparison with query params">
+        <section class="vanilla">
+            <h3>vanilla</h3>
+            <div class="highlight"><pre><span></span><code><span class="c1">// ----------------------------------- //</span>
+<span class="c1">// Use URL and URLSearchParams classes //</span>
+<span class="c1">// ----------------------------------- //</span>
+<span class="c1">//</span>
+<span class="c1">// Within node, this classes can be required:</span>
+<span class="c1">// ```</span>
+<span class="c1">// const { URL, URLSearchParams } = require(&#39;url&#39;);</span>
+<span class="c1">// ```</span>
+<span class="c1">//</span>
+<span class="c1">// Within the web, these classes are globally available.</span>
+
+<span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">),</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">param1</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+        <span class="nx">param2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
+        <span class="c1">// ...</span>
+        <span class="c1">// it might have more attributes</span>
+    <span class="p">};</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">key</span> <span class="p">=&gt;</span>
+    <span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">params</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span>
+<span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+
+<span class="c1">// --------------------------------------- //</span>
+<span class="c1">// Or with the URLSearchParams constructor //</span>
+<span class="c1">// --------------------------------------- //</span>
+
+<span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="s1">&#39;http://example.com&#39;</span><span class="p">),</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">param1</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+        <span class="nx">param2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
+        <span class="c1">// ...</span>
+        <span class="c1">// it might have more attributes</span>
+    <span class="p">},</span>
+    <span class="c1">// also...</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;param1&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;param2&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
+    <span class="p">]</span>
+
+<span class="nx">url</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</code></pre></div>
+        </section>
+        <section class="axios">
+            <h3>axios</h3>
+            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">param1</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+        <span class="nx">param2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
+        <span class="c1">// ...</span>
+        <span class="c1">// it might have more attributes</span>
+    <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="nx">params</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+</code></pre></div>
+        </section>
+    </section>
+</html>
