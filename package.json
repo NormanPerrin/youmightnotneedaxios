@@ -1,7 +1,7 @@
 {
     "name": "youmightnotneedaxios",
     "scripts": {
-        "build": "rm index.html && ./build.sh >>index.html",
+        "build": "rm index.html && bash build.sh >>index.html",
         "lint": "lint "
     },
     "repository": {
