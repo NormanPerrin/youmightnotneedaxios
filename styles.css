@@ -27,6 +27,7 @@ body {
 pre, code {
     text-align: left;
     font-size: 14px;
+    font-variant-ligatures: none;
     font-family: 'JetBrainsMono-Regular';
 }
 
