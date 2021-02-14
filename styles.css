@@ -27,7 +27,10 @@ body {
 a { color: aquamarine; }
 
 ol {
-    margin: 3rem 0 5rem;
+    padding: 2rem 1rem;
+    width: fit-content;
+    width: -moz-fit-content;
+    margin: auto;
 }
 
 pre, code {
@@ -80,6 +83,9 @@ pre .kd {
 pre .nb { color: dodgerblue; }
 
 @media (max-width: 1024px) {
+    body {
+        padding: 3rem .5rem;
+    }
     .comparison {
         flex-direction: column;
     }
