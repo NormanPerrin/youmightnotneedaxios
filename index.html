@@ -5,8 +5,25 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" href="./styles.css" />
-    <h2>fetch</h2>
+
+<h1>You might not need axios</h1>
+<p>This project aims to compare the usage of the <a href="">axios library</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch native API</a>, (<a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> for node), and also aims to leave space for contributions for others to learn in the way.</p>
+<p>In my opinion, sometimes libraries can make useful abstractions, but they can hide the simplicity of using the native APIs and the understanding of how these magic functions work. Having this understanding makes you more flexible to use different solutions, or modifying existing ones.</p>
+
+<ol>
+    <li><a href="#fetch">fetch</a></li>
+    <li><a href="#with-query-params">with query params</a></li>
+</ol>
+    <h2 id=fetch>fetch</h2>
     <section class="comparison fetch">
+        <section class="axios">
+            <h3>axios</h3>
+            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">;</span>
+
+<span class="nx">axios</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+</code></pre></div>
+        </section>
         <section class="vanilla">
             <h3>vanilla</h3>
             <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">;</span>
@@ -16,17 +33,23 @@
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
 </code></pre></div>
         </section>
+    </section>
+    <h2 id=with-query-params>with query params</h2>
+    <section class="comparison with query params">
         <section class="axios">
             <h3>axios</h3>
-            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">;</span>
+            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span>
+    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">param1</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+        <span class="nx">param2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
+        <span class="c1">// ...</span>
+        <span class="c1">// it might have more attributes</span>
+    <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="nx">params</span> <span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
 </code></pre></div>
         </section>
-    </section>
-    <h2>with query params</h2>
-    <section class="comparison with query params">
         <section class="vanilla">
             <h3>vanilla</h3>
             <div class="highlight"><pre><span></span><code><span class="c1">// ----------------------------------- //</span>
@@ -78,20 +101,6 @@
 <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-</code></pre></div>
-        </section>
-        <section class="axios">
-            <h3>axios</h3>
-            <div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span>
-    <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">param1</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
-        <span class="nx">param2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
-        <span class="c1">// ...</span>
-        <span class="c1">// it might have more attributes</span>
-    <span class="p">};</span>
-
-<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="nx">params</span> <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
 </code></pre></div>
         </section>
     </section>

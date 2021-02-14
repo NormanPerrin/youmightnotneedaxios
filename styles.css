@@ -24,6 +24,12 @@ body {
     padding: 3rem 1rem;
 }
 
+a { color: aquamarine; }
+
+ol {
+    margin: 3rem 0 5rem;
+}
+
 pre, code {
     text-align: left;
     font-size: 14px;
@@ -69,9 +75,9 @@ pre .c1 { color: gray; }
 pre .k1 { color: dodgerblue; }
 pre .kd {
     font-family: 'JetBrainsMono-BoldItalic';
-    color: mediumspringgreen;
+    color: limegreen;
 }
-pre .nb { color: mediumpurple; }
+pre .nb { color: dodgerblue; }
 
 @media (max-width: 1024px) {
     .comparison {
